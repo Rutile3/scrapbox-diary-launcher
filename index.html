@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scrapbox Diary Launcher</title>
+  <link rel="icon" href="Image/favicon.ico">
+  <link rel="stylesheet" href="css/app.css">
+  <script defer src="js/diary-core.js"></script>
+  <script defer src="js/launcher.js"></script>
+  <script defer src="js/app.js"></script>
+</head>
+<body>
+  <main>
+    <h1>Scrapbox Diary Launcher</h1>
+    <p data-launcher-status>Scrapboxの日次・月次ページを開くためのランチャーです。</p>
+
+    <section class="error" data-launcher-error role="alert" tabindex="-1" hidden>
+      <h2>入力エラー</h2>
+      <p data-launcher-error-message></p>
+    </section>
+
+    <section aria-labelledby="usage-heading">
+      <h2 id="usage-heading">URLの指定方法</h2>
+      <p><code>project</code> と <code>action</code> をクエリ文字列に指定してください。</p>
+      <ul>
+        <li><code>?action=show-today&amp;project=Example</code></li>
+        <li><code>?action=create-today&amp;project=Example#body=ENCODED_TEXT</code></li>
+        <li><code>?action=show-month&amp;project=Example</code></li>
+        <li><code>?action=create-month-schedule&amp;project=Example</code></li>
+      </ul>
+      <p>
+        日付を指定する場合は日次アクションに <code>date=YYYY-MM-DD</code>、
+        月次アクションに <code>month=YYYY-MM</code> を追加します。
+        省略時はブラウザーのローカル日付を使用します。
+      </p>
+      <p>
+        自由記述の本文は、GitHub Pagesへのクエリに含めず、
+        <code>#body=...</code> の形式でURLフラグメントに指定してください。
+      </p>
+    </section>
+  </main>
+</body>
+</html>

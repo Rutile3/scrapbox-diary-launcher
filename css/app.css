@@ -1,0 +1,36 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 52rem;
+  padding: 2rem 1.25rem 4rem;
+}
+
+h1,
+h2 {
+  line-height: 1.25;
+}
+
+code {
+  overflow-wrap: anywhere;
+}
+
+.error {
+  border: 2px solid #c62828;
+  border-radius: 0.5rem;
+  margin-block: 1.5rem;
+  padding: 1rem;
+}
+
+.error h2 {
+  margin-top: 0;
+}
