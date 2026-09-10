@@ -8,7 +8,9 @@
   <link rel="stylesheet" href="css/app.css">
   <script defer src="js/diary-core.js"></script>
   <script defer src="js/launcher.js"></script>
+  <script defer src="js/generators.js"></script>
   <script defer src="js/app.js"></script>
+  <script defer src="js/generator-ui.js"></script>
 </head>
 <body>
   <main>
@@ -20,7 +22,85 @@
       <p data-launcher-error-message></p>
     </section>
 
-    <section aria-labelledby="usage-heading">
+    <section class="card" aria-labelledby="generator-heading">
+      <h2 id="generator-heading">ランチャーを生成</h2>
+      <p>用途を選び、呼び出し元に貼り付けるコードを生成します。</p>
+
+      <form data-generator-form>
+        <div class="field">
+          <label for="generator-project">Scrapboxプロジェクト</label>
+          <input id="generator-project" name="project" type="text" required autocomplete="off" placeholder="Example">
+        </div>
+
+        <div class="field">
+          <label for="generator-action">アクション</label>
+          <select id="generator-action" name="action">
+            <option value="show-today">今日の日記を表示</option>
+            <option value="create-today">今日の日記を作成</option>
+            <option value="show-month">月ページを表示</option>
+            <option value="create-month-schedule">月間予定を作成</option>
+          </select>
+        </div>
+
+        <div class="field" data-date-field>
+          <label for="generator-date">日付（任意）</label>
+          <input id="generator-date" name="date" type="date">
+          <small>省略時はブラウザーの今日の日付を使用します。</small>
+        </div>
+
+        <div class="field" data-month-field hidden>
+          <label for="generator-month">月（任意）</label>
+          <input id="generator-month" name="month" type="month" disabled>
+          <small>省略時はブラウザーの現在月を使用します。</small>
+        </div>
+
+        <div class="field" data-body-field hidden>
+          <label for="generator-body">日記本文／テンプレート（任意）</label>
+          <textarea id="generator-body" name="body" rows="7" disabled></textarea>
+          <small>本文はURLフラグメントに格納され、ブラウザー内だけで処理されます。</small>
+        </div>
+
+        <button class="primary" type="submit">生成する</button>
+      </form>
+
+      <section class="error" data-generator-error role="alert" tabindex="-1" hidden>
+        <h3>生成できませんでした</h3>
+        <p data-generator-error-message></p>
+      </section>
+
+      <section data-generator-outputs aria-labelledby="outputs-heading" tabindex="-1" hidden>
+        <h3 id="outputs-heading">生成結果</h3>
+        <p class="privacy-note">本文を含む場合も、GitHub Pagesへ送るクエリ文字列には本文を含めません。</p>
+
+        <div class="output">
+          <label for="output-url">正規ランチャーURL</label>
+          <textarea id="output-url" rows="3" readonly></textarea>
+          <button type="button" data-copy-target="output-url" data-copy-label="URL">URLをコピー</button>
+        </div>
+
+        <div class="output">
+          <label for="output-userscript">Scrapbox UserScript／JavaScript</label>
+          <textarea id="output-userscript" rows="6" readonly></textarea>
+          <button type="button" data-copy-target="output-userscript" data-copy-label="UserScript">UserScriptをコピー</button>
+        </div>
+
+        <div class="output recommended">
+          <label for="output-powershell">PowerShell（Windowsで推奨）</label>
+          <textarea id="output-powershell" rows="3" readonly></textarea>
+          <button type="button" data-copy-target="output-powershell" data-copy-label="PowerShell">PowerShellをコピー</button>
+        </div>
+
+        <div class="output">
+          <label for="output-bat">BAT</label>
+          <textarea id="output-bat" rows="3" readonly></textarea>
+          <button type="button" data-copy-target="output-bat" data-copy-label="BAT">BATをコピー</button>
+        </div>
+      </section>
+
+      <p class="copy-status" data-copy-status role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="card" aria-labelledby="usage-heading">
       <h2 id="usage-heading">URLの指定方法</h2>
       <p><code>project</code> と <code>action</code> をクエリ文字列に指定してください。</p>
       <ul>
