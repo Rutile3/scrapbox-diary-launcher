@@ -112,12 +112,10 @@ node --test
 ## ドキュメント
 
 - [文書一覧](./docs/README.md)
+- [機能仕様書](./docs/functional-spec.md)
 - [タスクリスト](./docs/task-list.md)
 - [RedirectPageからの移行ガイド](./docs/MIGRATION.md)
 - [手動確認手順](./docs/MANUAL_TESTS.md)
-- [リポジトリ内へ移行した旧Wiki](./docs/wiki/README.md)
-
-旧Wikiの情報は履歴としてリポジトリ内に保存し、現行仕様の注記と旧版の記録を区別しています。通常の利用に外部GitHub Wikiは必要ありません。
 
 ## ライセンス
 

@@ -27,14 +27,37 @@ test("READMEから主要なリポジトリ内文書へ移動できる", () => {
   const readme = read("README.md");
   for (const target of [
     "docs/README.md",
+    "docs/functional-spec.md",
     "docs/task-list.md",
     "docs/MIGRATION.md",
-    "docs/MANUAL_TESTS.md",
-    "docs/wiki/README.md"
+    "docs/MANUAL_TESTS.md"
   ]) {
     assert.match(readme, new RegExp(target.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     assert.equal(fs.existsSync(path.join(root, target)), true);
   }
+});
+
+test("機能仕様書が現行ランチャーと互換動作を網羅する", () => {
+  const specification = read("docs/functional-spec.md");
+
+  for (const action of ["show-today", "create-today", "show-month", "create-month-schedule"]) {
+    assert.match(specification, new RegExp(`\\b${action}\\b`));
+  }
+  for (const code of [
+    "invalid-url",
+    "missing-action",
+    "invalid-action",
+    "body-in-query",
+    "body-not-supported",
+    "invalid-parameter"
+  ]) {
+    assert.match(specification, new RegExp(`\\b${code}\\b`));
+  }
+  for (const endpoint of ["CreateToday", "ShowToday", "CreateMonthSchedule", "ShowMonthSchedule"]) {
+    assert.match(specification, new RegExp(`${endpoint}\\.html`));
+  }
+  assert.match(specification, /Rutile3-Test/);
+  assert.match(specification, /#月予定表/);
 });
 
 test("文書一覧から作業管理と変更記録へ移動できる", () => {
@@ -45,6 +68,7 @@ test("文書一覧から作業管理と変更記録へ移動できる", () => {
     "spec_changes.md",
     "bug_fixes.md",
     "refactoring.md",
+    "functional-spec.md",
     "REFACTOR_PLAN.md"
   ]) {
     assert.match(index, new RegExp(target.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
@@ -52,25 +76,19 @@ test("文書一覧から作業管理と変更記録へ移動できる", () => {
   }
 });
 
-test("移行済みWikiの4機能ページで現行版と旧版を区別する", () => {
-  for (const name of ["CreateToday", "ShowToday", "CreateMonthSchedule", "ShowMonthSchedule"]) {
-    const page = read(`docs/wiki/${name}.md`);
-    assert.match(page, /## 現行版/);
-    assert.match(page, /## 旧RedirectPage版の記録/);
-    assert.match(page, /scrapbox-diary-launcher/);
-    assert.match(page, /移行ガイド/);
-  }
-});
-
 test("Markdownのリポジトリ相対リンク先が存在する", () => {
   const files = [
     "README.md",
-    "docs/wiki/README.md",
-    "docs/wiki/Home.md",
-    "docs/wiki/CreateToday.md",
-    "docs/wiki/ShowToday.md",
-    "docs/wiki/CreateMonthSchedule.md",
-    "docs/wiki/ShowMonthSchedule.md"
+    "docs/README.md",
+    "docs/functional-spec.md",
+    "docs/MIGRATION.md",
+    "docs/MANUAL_TESTS.md",
+    "docs/REFACTOR_PLAN.md",
+    "docs/task-list.md",
+    "docs/spec_additions.md",
+    "docs/spec_changes.md",
+    "docs/bug_fixes.md",
+    "docs/refactoring.md"
   ];
 
   for (const relativePath of files) {

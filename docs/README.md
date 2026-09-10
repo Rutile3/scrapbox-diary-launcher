@@ -7,6 +7,7 @@
 
 ## 開発・保守
 
+- [機能仕様書](./functional-spec.md): 現行機能と外部動作の正本
 - [タスクリスト](./task-list.md): 現在および今後の作業状態
 - [手動確認手順](./MANUAL_TESTS.md): 自動化できない確認項目と検証記録
 - [機能・仕様の追加](./spec_additions.md): 新しい機能や仕様の変更記録
@@ -17,7 +18,5 @@
 ## 履歴資料
 
 - [統合ランチャー改修計画](./REFACTOR_PLAN.md): 初回改修の目標、設計、完了条件
-- [移行済み旧Wiki](./wiki/README.md): RedirectPage時代のWikiと現行仕様の注記
 
 `REFACTOR_PLAN.md` は完了済みの計画を記録した資料です。現在の作業状態は `task-list.md` で管理します。
-
