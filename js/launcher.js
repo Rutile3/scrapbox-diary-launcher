@@ -23,7 +23,26 @@
     "create-month-schedule"
   ]);
 
+  /**
+   * @typedef {"show-today"|"create-today"|"show-month"|"create-month-schedule"} LauncherAction
+   */
+
+  /** @typedef {{type: "help"}} LauncherHelpResult */
+
+  /**
+   * @typedef {Object} LauncherRedirectResult
+   * @property {LauncherAction} action 実行するアクション
+   * @property {string} destination 遷移先のScrapbox URL
+   * @property {string} project Scrapboxプロジェクト名
+   * @property {"redirect"} type 結果種別
+   */
+
+  /** ランチャー入力の検証エラー。 */
   class LauncherError extends Error {
+    /**
+     * @param {string} message 利用者向けメッセージ
+     * @param {string} code 機械判定用のエラーコード
+     */
     constructor(message, code) {
       super(message);
       this.name = "LauncherError";
@@ -31,6 +50,11 @@
     }
   }
 
+  /**
+   * URLフラグメントから自由記述本文を取得する。
+   * @param {URL} url 対象URL
+   * @returns {string|undefined} bodyがなければundefined
+   */
   const getFragmentBody = (url) => {
     if (!url.hash) {
       return undefined;
@@ -40,6 +64,13 @@
     return fragment.has("body") ? fragment.get("body") : undefined;
   };
 
+  /**
+   * ランチャーURLを検証し、表示内容または遷移先を解決する。
+   * @param {string|URL} inputUrl ランチャーURL
+   * @param {Date} [now] 日付省略時に基準とする現在日時
+   * @returns {Readonly<LauncherHelpResult|LauncherRedirectResult>}
+   * @throws {LauncherError} URL、action、project、日付、月、bodyの指定が不正な場合
+   */
   const resolveLauncherRequest = (inputUrl, now) => {
     let url;
     try {

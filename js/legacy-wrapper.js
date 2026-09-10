@@ -1,6 +1,7 @@
 (function () {
   "use strict";
 
+  /** @param {Error} error 表示するエラー @returns {void} */
   const showError = (error) => {
     document.body.textContent = `互換ランチャーを実行できませんでした: ${error.message}`;
   };

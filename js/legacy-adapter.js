@@ -24,16 +24,26 @@
     "show-today": Object.freeze({ legacyParameter: "yymmdd", canonicalParameter: "date" })
   });
 
+  /** @param {number} value @returns {string} */
   const pad2 = (value) => String(value).padStart(2, "0");
 
+  /** @param {Date} date @returns {string} YYYY-MM-DD形式の日付 */
   const toIsoDate = (date) => {
     return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`;
   };
 
+  /** @param {Date} date @returns {string} YYYY-MM形式の月 */
   const toIsoMonth = (date) => {
     return `${date.getFullYear()}-${pad2(date.getMonth() + 1)}`;
   };
 
+  /**
+   * 旧形式の日付または月をISO形式へ変換する。
+   * 旧実装との互換性のため、不正値は例外にせず省略扱いにする。
+   * @param {"yymmdd"|"yymm"} name 旧パラメーター名
+   * @param {string} value 変換対象
+   * @returns {string|undefined}
+   */
   const convertLegacyValue = (name, value) => {
     try {
       return name === "yymmdd"
@@ -46,6 +56,15 @@
     }
   };
 
+  /**
+   * 旧エンドポイントのURLを正規ランチャーURLへ変換する。
+   * @param {string|URL} legacyUrl 旧形式のパラメーターを含むURL
+   * @param {string|URL} canonicalBaseUrl 正規ランチャーのベースURL
+   * @param {string} action 旧エンドポイントに対応するアクション
+   * @returns {string} 正規ランチャーURL
+   * @throws {RangeError} actionが未対応の場合
+   * @throws {TypeError} URLを解析できない場合
+   */
   const buildCanonicalUrl = (legacyUrl, canonicalBaseUrl, action) => {
     const configuration = LEGACY_ACTIONS[action];
     if (!configuration) {
