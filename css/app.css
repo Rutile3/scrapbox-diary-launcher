@@ -1,0 +1,148 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+  --accent: #0f766e;
+  --border: color-mix(in srgb, CanvasText 24%, transparent);
+  --surface: color-mix(in srgb, Canvas 94%, CanvasText 6%);
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 52rem;
+  padding: 2rem 1.25rem 4rem;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+}
+
+code {
+  overflow-wrap: anywhere;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  margin-block: 1.5rem;
+  padding: 1.25rem;
+}
+
+.card > :first-child {
+  margin-top: 0;
+}
+
+form,
+.field,
+.output {
+  display: grid;
+  gap: 0.45rem;
+}
+
+form {
+  gap: 1rem;
+}
+
+label {
+  font-weight: 650;
+}
+
+input,
+select,
+textarea,
+button {
+  box-sizing: border-box;
+  font: inherit;
+}
+
+input,
+select,
+textarea {
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  padding: 0.65rem;
+  width: 100%;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  border: 1px solid var(--border);
+  border-radius: 0.4rem;
+  cursor: pointer;
+  justify-self: start;
+  padding: 0.55rem 0.9rem;
+}
+
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+  font-weight: 700;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  outline-offset: 2px;
+}
+
+small,
+.privacy-note {
+  color: color-mix(in srgb, CanvasText 72%, transparent);
+}
+
+[data-generator-outputs] {
+  margin-top: 1.75rem;
+}
+
+.output {
+  background: var(--surface);
+  border-radius: 0.5rem;
+  margin-block: 1rem;
+  padding: 1rem;
+}
+
+.output.recommended {
+  border-left: 0.3rem solid var(--accent);
+}
+
+.copy-status {
+  min-height: 1.6em;
+}
+
+.error {
+  border: 2px solid #c62828;
+  border-radius: 0.5rem;
+  margin-block: 1.5rem;
+  padding: 1rem;
+}
+
+.error h2 {
+  margin-top: 0;
+}
+
+@media (max-width: 36rem) {
+  main {
+    padding-inline: 0.8rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+}
