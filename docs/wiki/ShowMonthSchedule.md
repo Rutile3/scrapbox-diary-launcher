@@ -1,4 +1,19 @@
 # ShowMonthSchedule
+
+## 現行版
+
+現在または指定した月の月次ページを表示する機能です。正規ランチャーでは、`project` を必須とし、任意の月を `month=YYYY-MM` で指定します。正規action名は `show-month` です。
+
+```text
+https://rutile3.github.io/scrapbox-diary-launcher/?action=show-month&project=Example&month=2024-12
+```
+
+新しいリポジトリ内では、従来の `Scrapbox/Diary/ShowMonthSchedule/ShowMonthSchedule.html` も互換ラッパーとして利用できます。旧 `project_url` と `yymm` を正規形式へ変換します。
+
+新しいURLはルートページのジェネレーターで作成してください。詳細は[移行ガイド](../MIGRATION.md)を参照してください。
+
+## 旧RedirectPage版の記録
+
 [ShowMonthSchedule](https://github.com/Rutile3/RedirectPage/tree/master/Scrapbox/Diary/ShowMonthSchedule)は[Scrapbox](https://scrapbox.io/product)の月予定表を表示するようリダイレクトするページです。  
 
 

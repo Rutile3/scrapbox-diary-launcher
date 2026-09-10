@@ -1,4 +1,19 @@
 # ShowToday
+
+## 現行版
+
+今日または指定日の日次ページを表示する機能です。正規ランチャーでは、`project` を必須とし、任意の日付を `date=YYYY-MM-DD` で指定します。
+
+```text
+https://rutile3.github.io/scrapbox-diary-launcher/?action=show-today&project=Example&date=2024-02-29
+```
+
+新しいリポジトリ内では、従来の `Scrapbox/Diary/ShowToday/ShowToday.html` も互換ラッパーとして利用できます。旧 `project_url` と `yymmdd` を正規形式へ変換します。
+
+新しいURLはルートページのジェネレーターで作成してください。詳細は[移行ガイド](../MIGRATION.md)を参照してください。
+
+## 旧RedirectPage版の記録
+
 [ShowToday](https://github.com/Rutile3/RedirectPage/tree/master/Scrapbox/Diary/ShowToday)は[Scrapbox](https://scrapbox.io/product)の日記を表示するようリダイレクトするページです。  
 
 

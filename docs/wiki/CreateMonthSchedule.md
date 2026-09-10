@@ -1,4 +1,19 @@
 # CreateMonthSchedule
+
+## 現行版
+
+指定月の前月・翌月リンク、月見出し、各日の日次ページリンク、`#月予定表` を含む本文を生成し、月次ページを作成または表示する機能です。正規ランチャーでは、`project` を必須とし、任意の月を `month=YYYY-MM` で指定します。
+
+```text
+https://rutile3.github.io/scrapbox-diary-launcher/?action=create-month-schedule&project=Example&month=2024-12
+```
+
+新しいリポジトリ内では、従来の `Scrapbox/Diary/CreateMonthSchedule/CreateMonthSchedule.html` も互換ラッパーとして利用できます。旧 `project_url` と `yymm` を正規形式へ変換します。
+
+新しいURLはルートページのジェネレーターで作成してください。詳細は[移行ガイド](../MIGRATION.md)を参照してください。
+
+## 旧RedirectPage版の記録
+
 [CreateMonthSchedule](https://github.com/Rutile3/RedirectPage/tree/master/Scrapbox/Diary/CreateMonthSchedule)は[Scrapbox](https://scrapbox.io/product)に月予定表を作成するようリダイレクトするページです。  
 
 ## URLパラメータ
