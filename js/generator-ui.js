@@ -113,6 +113,7 @@
         const generated = window.ScrapboxDiaryGenerators.generateAll(options);
         setOutput("output-url", generated.url);
         setOutput("output-userscript", generated.userScript);
+        setOutput("output-bookmarklet", generated.bookmarklet);
         setOutput("output-powershell", generated.powerShell);
         setOutput("output-bat", generated.bat);
         outputs.hidden = false;

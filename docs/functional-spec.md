@@ -12,7 +12,7 @@
 
 - 正規ランチャーURLを解釈し、対象のScrapboxページへ遷移する
 - 月間予定ページの本文をブラウザー内で生成する
-- 正規URL、Scrapbox UserScript、PowerShell、BATを画面から生成する
+- 正規URL、ブックマークレット、Scrapbox UserScript、PowerShell、BATを画面から生成する
 - 改名後のリポジトリ内で、従来の4つのHTMLパスと旧パラメーターを正規ランチャーへ変換する
 
 プレーンなHTML、CSS、JavaScriptで動作し、フレームワーク、外部CDN、ビルド処理、実行時サーバーを必要としません。
@@ -209,11 +209,12 @@ https://scrapbox.io/<URLエンコード済みproject>/<ページ名>?body=<URL�
 
 ### 8.3 出力
 
-1回の生成操作で次の4形式を出力します。
+1回の生成操作で次の5形式を出力します。
 
 | 出力 | 形式 |
 | --- | --- |
 | 正規ランチャーURL | 検証済みの入力を含む絶対URL |
+| ブックマークレット | 正規URLへ遷移する `javascript:void(location.href=...)` 形式のJavaScript URL |
 | Scrapbox UserScript／JavaScript | `location.href` に正規URLを代入する即時実行関数 |
 | PowerShell | `Start-Process -FilePath '<正規URL>'` |
 | BAT | `@start "" "<正規URL>"` |
@@ -266,7 +267,7 @@ Scrapbox/Diary/ShowMonthSchedule/ShowMonthSchedule.html
 - 本文をコンソールへ出力しない
 - 入力値や本文を `localStorage` または `sessionStorage` へ保存しない
 - 不正な入力で別のScrapboxプロジェクトへ暗黙に転送しない
-- ユーザー入力はURL、JavaScript、PowerShell、BATの用途に応じてエンコードまたはエスケープする
+- ユーザー入力はURL、ブックマークレット、JavaScript、PowerShell、BATの用途に応じてエンコードまたはエスケープする
 
 ## 11. 対応範囲外
 
@@ -286,9 +287,8 @@ Scrapbox/Diary/ShowMonthSchedule/ShowMonthSchedule.html
 - 4アクションとエラー条件
 - 本文のフラグメント受け渡しと特殊文字
 - 互換パラメーター変換
-- UserScript、PowerShell、BAT生成
+- ブックマークレット、UserScript、PowerShell、BAT生成
 - 画面に必要な入力、出力、コピー操作
 - 文書間リンク
 
 ブラウザー操作など、自動化だけで完結しない確認は[手動確認手順](./MANUAL_TESTS.md)に記録します。
-

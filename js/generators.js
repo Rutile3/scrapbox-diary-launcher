@@ -32,6 +32,7 @@
   /**
    * @typedef {Object} GeneratedLaunchers
    * @property {string} bat BATランチャー
+   * @property {string} bookmarklet ブックマークレット
    * @property {string} powerShell PowerShellランチャー
    * @property {string} url 正規ランチャーURL
    * @property {string} userScript Scrapbox UserScript用JavaScript
@@ -153,6 +154,17 @@
     ].join("\n");
   };
 
+  /**
+   * 指定URLへ遷移するブックマークレットを生成する。
+   * @param {string|URL} launcherUrl ランチャーURL
+   * @returns {string}
+   * @throws {RangeError} URLを解析できない場合
+   */
+  const generateBookmarklet = (launcherUrl) => {
+    const urlLiteral = JSON.stringify(normalizeUrl(launcherUrl));
+    return `javascript:void(location.href=${urlLiteral})`;
+  };
+
   /** @param {string} value @returns {string} PowerShell単一引用符文字列用の値 */
   const escapePowerShellSingleQuotedString = (value) => value.replace(/'/g, "''");
 
@@ -191,6 +203,7 @@
     const url = generateLauncherUrl(options);
     return Object.freeze({
       bat: generateBat(url),
+      bookmarklet: generateBookmarklet(url),
       powerShell: generatePowerShell(url),
       url,
       userScript: generateUserScript(url)
@@ -202,6 +215,7 @@
     escapePowerShellSingleQuotedString,
     generateAll,
     generateBat,
+    generateBookmarklet,
     generateLauncherUrl,
     generatePowerShell,
     generateUserScript

@@ -97,6 +97,22 @@ test("UserScriptを有効なJavaScriptとして生成する", () => {
   assert.equal(sandbox.location.href, url);
 });
 
+test("ブックマークレットを有効なJavaScript URLとして生成する", () => {
+  const url = generators.generateLauncherUrl({
+    action: "create-today",
+    baseUrl: BASE,
+    body: SPECIAL_BODY,
+    project: "Example"
+  });
+  const bookmarklet = generators.generateBookmarklet(url);
+  const sandbox = { location: { href: "https://example.com/" } };
+
+  assert.ok(bookmarklet.startsWith("javascript:"));
+  new vm.Script(bookmarklet.slice("javascript:".length)).runInNewContext(sandbox);
+  assert.equal(sandbox.location.href, url);
+  assert.ok(bookmarklet.includes("#body="));
+});
+
 test("PowerShell用の単一引用符を安全にエスケープする", () => {
   assert.equal(generators.escapePowerShellSingleQuotedString("a'b''c"), "a''b''''c");
 
@@ -138,6 +154,7 @@ test("全形式を同じ正規URLからまとめて生成する", () => {
   });
 
   assert.equal(outputs.url, `${BASE}?action=show-month&project=Example&month=2026-09`);
+  assert.ok(outputs.bookmarklet.includes(outputs.url));
   assert.ok(outputs.userScript.includes(outputs.url));
   assert.ok(outputs.powerShell.includes(outputs.url));
   assert.ok(outputs.bat.includes(outputs.url));
