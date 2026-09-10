@@ -111,8 +111,8 @@ node --test
 
 ## ドキュメント
 
-- [改修計画](./docs/REFACTOR_PLAN.md)
-- [改修TODO](./docs/TODO.md)
+- [文書一覧](./docs/README.md)
+- [タスクリスト](./docs/task-list.md)
 - [RedirectPageからの移行ガイド](./docs/MIGRATION.md)
 - [手動確認手順](./docs/MANUAL_TESTS.md)
 - [リポジトリ内へ移行した旧Wiki](./docs/wiki/README.md)

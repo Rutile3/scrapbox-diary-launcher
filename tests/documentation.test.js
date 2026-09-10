@@ -26,14 +26,29 @@ test("READMEだけで主要機能、パラメーター、プライバシー方�
 test("READMEから主要なリポジトリ内文書へ移動できる", () => {
   const readme = read("README.md");
   for (const target of [
-    "docs/REFACTOR_PLAN.md",
-    "docs/TODO.md",
+    "docs/README.md",
+    "docs/task-list.md",
     "docs/MIGRATION.md",
     "docs/MANUAL_TESTS.md",
     "docs/wiki/README.md"
   ]) {
     assert.match(readme, new RegExp(target.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     assert.equal(fs.existsSync(path.join(root, target)), true);
+  }
+});
+
+test("文書一覧から作業管理と変更記録へ移動できる", () => {
+  const index = read("docs/README.md");
+  for (const target of [
+    "task-list.md",
+    "spec_additions.md",
+    "spec_changes.md",
+    "bug_fixes.md",
+    "refactoring.md",
+    "REFACTOR_PLAN.md"
+  ]) {
+    assert.match(index, new RegExp(target.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+    assert.equal(fs.existsSync(path.join(root, "docs", target)), true);
   }
 });
 
