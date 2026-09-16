@@ -38,6 +38,16 @@ test("共有生成処理をUI処理より先に読み込む", () => {
   assert.ok(generatorUi > generatorModule);
 });
 
+test("faviconを小文字のimageフォルダーから読み込む", () => {
+  const html = read("index.html");
+  const rootEntries = fs.readdirSync(root);
+
+  assert.match(html, /href="image\/favicon\.ico"/);
+  assert.equal(fs.existsSync(path.join(root, "image", "favicon.ico")), true);
+  assert.equal(rootEntries.includes("image"), true);
+  assert.equal(rootEntries.includes("Image"), false);
+});
+
 test("各生成結果にコピー操作が関連付けられている", () => {
   const html = read("index.html");
   for (const id of ["output-url", "output-userscript", "output-powershell", "output-bat"]) {
