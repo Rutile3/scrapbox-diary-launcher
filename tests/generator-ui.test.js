@@ -18,7 +18,6 @@ test("ジェネレーターに必要な入力と出力がルートページに�
     "generator-body",
     "output-url",
     "output-userscript",
-    "output-bookmarklet",
     "output-powershell",
     "output-bat"
   ];
@@ -41,7 +40,7 @@ test("共有生成処理をUI処理より先に読み込む", () => {
 
 test("各生成結果にコピー操作が関連付けられている", () => {
   const html = read("index.html");
-  for (const id of ["output-url", "output-userscript", "output-bookmarklet", "output-powershell", "output-bat"]) {
+  for (const id of ["output-url", "output-userscript", "output-powershell", "output-bat"]) {
     assert.match(html, new RegExp(`data-copy-target="${id}"`));
   }
 });

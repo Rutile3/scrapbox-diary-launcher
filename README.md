@@ -31,7 +31,6 @@ https://rutile3.github.io/scrapbox-diary-launcher/
 4. 「生成する」を押す
 5. 用途に合わせて次の出力をコピーする
    - 正規ランチャーURL
-   - ブックマークレット
    - Scrapbox UserScript／JavaScript
    - PowerShell
    - BAT
