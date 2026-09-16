@@ -26,6 +26,10 @@
   const run = () => {
     try {
       const result = window.ScrapboxDiaryLauncher.resolveLauncherRequest(window.location.href);
+      if (result.type === "help") {
+        window.location.replace(new URL("generator.html", window.location.href).href);
+        return;
+      }
       if (result.type === "redirect") {
         setStatus("Scrapboxへ移動しています…");
         window.location.assign(result.destination);
