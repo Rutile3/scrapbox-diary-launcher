@@ -13,7 +13,6 @@
 - 正規ランチャーURLを解釈し、対象のScrapboxページへ遷移する
 - 月間予定ページの本文をブラウザー内で生成する
 - 正規URL、Scrapbox UserScript、PowerShell、BATを画面から生成する
-- 改名後のリポジトリ内で、従来の4つのHTMLパスと旧パラメーターを正規ランチャーへ変換する
 
 プレーンなHTML、CSS、JavaScriptで動作し、フレームワーク、外部CDN、ビルド処理、実行時サーバーを必要としません。
 
@@ -22,7 +21,6 @@
 | 用語 | 意味 |
 | --- | --- |
 | 正規ランチャー | リポジトリのルートページと現行パラメーターで構成するインターフェース |
-| 互換エンドポイント | 従来のHTMLパスとパラメーターを正規ランチャーへ変換する入口 |
 | 対象日 | 日次ページ名の生成に使用するローカル日付 |
 | 対象月 | 月次ページ名および月間予定本文の生成に使用するローカル月 |
 | 本文 | Scrapboxのページ作成URLへ `body` として渡す文字列 |
@@ -228,39 +226,7 @@ PowerShellでは単一引用符を2個に、BATでは `%` を `%%`、二重引�
 - 成功または失敗を画面上のステータスとして通知する
 - 失敗時は対象テキストを選択し、手動コピーを可能にする
 
-## 9. 互換エンドポイント
-
-### 9.1 対象パス
-
-改名後のリポジトリ内で次のパスを維持します。
-
-```text
-Scrapbox/Diary/CreateToday/CreateToday.html
-Scrapbox/Diary/ShowToday/ShowToday.html
-Scrapbox/Diary/CreateMonthSchedule/CreateMonthSchedule.html
-Scrapbox/Diary/ShowMonthSchedule/ShowMonthSchedule.html
-```
-
-各HTMLは共有の互換変換処理を読み込み、正規ランチャーURLへ置換遷移します。
-
-### 9.2 パラメーター変換
-
-| 旧パラメーター | 正規パラメーター | 変換 |
-| --- | --- | --- |
-| `project_url` | `project` | 値をそのまま引き渡す |
-| `yymmdd` | `date` | `YYMMDD` を2000年代の `YYYY-MM-DD` へ変換する |
-| `yymm` | `month` | `YYMM` を2000年代の `YYYY-MM` へ変換する |
-| `body` | フラグメントの `body` | `CreateToday`だけでクエリからフラグメントへ移す |
-
-互換エンドポイントに限り、`project_url` がない場合は従来の既定値 `Rutile3-Test` を使用します。正規ランチャーにはこの既定値を適用しません。
-
-不正な `yymmdd` または `yymm` は、旧実装との互換性を維持するため変換先から省略し、正規ランチャーに現在のローカル日付または月を使用させます。
-
-### 9.3 互換範囲
-
-互換エンドポイントが保証するのは、新しい `/scrapbox-diary-launcher/` 配下のパスだけです。旧 `/RedirectPage/` を含むGitHub Pages URLの転送は保証しません。
-
-## 10. セキュリティと保存
+## 9. セキュリティと保存
 
 - 自由記述本文をGitHub Pagesへのクエリ文字列に含めない
 - 本文をコンソールへ出力しない
@@ -268,15 +234,16 @@ Scrapbox/Diary/ShowMonthSchedule/ShowMonthSchedule.html
 - 不正な入力で別のScrapboxプロジェクトへ暗黙に転送しない
 - ユーザー入力はURL、JavaScript、PowerShell、BATの用途に応じてエンコードまたはエスケープする
 
-## 11. 対応範囲外
+## 10. 対応範囲外
 
 - Scrapboxの認証または権限管理
 - Scrapboxページの作成完了確認
 - サーバー側での本文保存または中継
 - 旧 `/RedirectPage/` Pages URLの自動転送
+- 従来のHTMLパスおよび旧パラメーターの互換処理
 - 汎用的なScrapbox自動化機能
 
-## 12. 検証
+## 11. 検証
 
 自動テストでは次を確認します。
 
@@ -285,7 +252,6 @@ Scrapbox/Diary/ShowMonthSchedule/ShowMonthSchedule.html
 - 月間予定本文
 - 4アクションとエラー条件
 - 本文のフラグメント受け渡しと特殊文字
-- 互換パラメーター変換
 - UserScript、PowerShell、BAT生成
 - 画面に必要な入力、出力、コピー操作
 - 文書間リンク

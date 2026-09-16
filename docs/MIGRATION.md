@@ -127,21 +127,6 @@ https://rutile3.github.io/scrapbox-diary-launcher/?action=show-month&project=Exa
 - `yymm=2412` を `month=2024-12` に変更
 - action名では月ページを表示する目的を `show-month` と表現
 
-## 新しいリポジトリ内の互換パス
-
-急いで正規形式へ移行できない呼び出し元のために、新しいリポジトリ内では従来のHTMLパスと旧パラメーターを維持しています。
-
-```text
-https://rutile3.github.io/scrapbox-diary-launcher/Scrapbox/Diary/CreateToday/CreateToday.html
-https://rutile3.github.io/scrapbox-diary-launcher/Scrapbox/Diary/ShowToday/ShowToday.html
-https://rutile3.github.io/scrapbox-diary-launcher/Scrapbox/Diary/CreateMonthSchedule/CreateMonthSchedule.html
-https://rutile3.github.io/scrapbox-diary-launcher/Scrapbox/Diary/ShowMonthSchedule/ShowMonthSchedule.html
-```
-
-これらの互換パスでは、`project_url`、`yymmdd`、`yymm`、`body` を使用できます。`CreateToday` の `body` は、互換ラッパーが正規ランチャーへ転送するときにURLフラグメントへ移します。
-
-ただし、互換パスは新しい `/scrapbox-diary-launcher/` の下にあります。旧 `/RedirectPage/` URLをそのまま動作させるものではありません。将来の保守性を考慮し、可能な場合は正規ランチャーへ移行してください。
-
 ## 本文の移行とプライバシー
 
 旧CreateToday URLでは、本文を次のようにクエリ文字列へ入れていました。
@@ -218,4 +203,4 @@ BATでは、URLエンコードに含まれる `%` をファイル内で `%%` と
 
 この移行では、代替の `RedirectPage` リポジトリを作成せず、旧リポジトリの設定も変更しません。リポジトリ内へ移行していた旧Wiki文書は廃止済みです。
 
-旧 `/RedirectPage/` Pages URLを維持する必要がある場合は、別途リダイレクト用サイトなどの運用判断が必要です。これは新しいリポジトリ内の互換ラッパーだけでは解決できません。
+旧 `/RedirectPage/` Pages URL、従来のHTMLパス、旧パラメーターはサポートしません。すべての呼び出し元を正規ランチャーURLへ更新してください。

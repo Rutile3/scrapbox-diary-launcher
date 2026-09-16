@@ -37,7 +37,7 @@ test("READMEから主要なリポジトリ内文書へ移動できる", () => {
   }
 });
 
-test("機能仕様書が現行ランチャーと互換動作を網羅する", () => {
+test("機能仕様書が現行ランチャーの動作を網羅する", () => {
   const specification = read("docs/functional-spec.md");
 
   for (const action of ["show-today", "create-today", "show-month", "create-month-schedule"]) {
@@ -53,10 +53,6 @@ test("機能仕様書が現行ランチャーと互換動作を網羅する", ()
   ]) {
     assert.match(specification, new RegExp(`\\b${code}\\b`));
   }
-  for (const endpoint of ["CreateToday", "ShowToday", "CreateMonthSchedule", "ShowMonthSchedule"]) {
-    assert.match(specification, new RegExp(`${endpoint}\\.html`));
-  }
-  assert.match(specification, /Rutile3-Test/);
   assert.match(specification, /#月予定表/);
 });
 

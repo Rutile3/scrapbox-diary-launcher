@@ -95,7 +95,7 @@ https://rutile3.github.io/scrapbox-diary-launcher/?action=create-month-schedule&
 
 リポジトリ名の変更に伴い、`/RedirectPage/` を含む旧GitHub Pages URLは利用できません。Scrapbox UserScript、PowerShell／BAT、Windowsスタートアップ、ブックマークなど、リポジトリ外の呼び出し元も更新してください。
 
-新しいリポジトリ内には4つの旧HTMLパスを互換ラッパーとして残していますが、旧 `/RedirectPage/` URLを転送するものではありません。
+従来のHTMLパスと旧パラメーターには対応していません。呼び出し元は、ルートの正規ランチャーURLを使用するように更新してください。
 
 詳しい新旧URL例と更新手順は[移行ガイド](./docs/MIGRATION.md)を参照してください。
 

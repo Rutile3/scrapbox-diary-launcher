@@ -64,22 +64,15 @@
 
 Scrapbox UserScript、BAT、PowerShell、ブックマーク、スタートアップスクリプトは、基本的にランチャーURLを構築して開くだけにしてください。可能な限り、業務ロジックと日付ロジックはこのリポジトリ内に置いてください。
 
-### 5. URL互換性を明示的な移行課題として扱う
+### 5. 旧URLから正規ランチャーへ直接移行する
 
 このリポジトリは `RedirectPage` から `scrapbox-diary-launcher` に改名されています。
 
 リポジトリ改名後に、旧GitHub PagesプロジェクトサイトのURLも自動的にリダイレクトされるとは考えないでください。リポジトリやWikiのリダイレクトと、GitHub PagesプロジェクトサイトのURLは別です。
 
-可能な限り、新しいリポジトリ内でも次の既存パスを維持してください。
+旧GitHub Pages URL、従来のHTMLパス、`project_url`、`yymmdd`、`yymm` などの旧パラメーターはサポートしません。外部の呼び出し元を、ルートの正規ランチャーURLと現行パラメーターへ直接移行してください。
 
-- `Scrapbox/Diary/CreateToday/CreateToday.html`
-- `Scrapbox/Diary/ShowToday/ShowToday.html`
-- `Scrapbox/Diary/CreateMonthSchedule/CreateMonthSchedule.html`
-- `Scrapbox/Diary/ShowMonthSchedule/ShowMonthSchedule.html`
-
-旧ファイルは、新しい統合ランチャーへ転送する薄い互換ラッパーにして構いません。
-
-ただし、新リポジトリ内の互換ラッパーだけでは、URLに `/RedirectPage/` を含む旧Pages URLの動作は保証できません。外部呼び出し元の移行手順を文書化してください。
+明示的な要件がない限り、旧HTMLパスや旧パラメーターの互換処理を再導入しないでください。
 
 新しい `RedirectPage` リポジトリを自動作成しないでください。
 
@@ -186,7 +179,6 @@ Scrapbox UserScript、BAT、PowerShell、ブックマーク、スタートアッ
 - 生成されたPowerShellをテストする
 - 生成されたBAT出力をテストする
 - 月間予定本文を確認する
-- 改名後のリポジトリに互換ラッパーのパスが存在することを確認する
 - 新しい経路で、機密性のある本文がGitHub Pagesへのクエリ文字列に含まれないことを確認する
 
 自動化できないブラウザー確認や手動確認は文書化してください。
