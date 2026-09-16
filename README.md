@@ -10,6 +10,8 @@ Scrapbox UserScript、ブックマーク、PowerShell、BAT、Windowsスター�
 https://rutile3.github.io/scrapbox-diary-launcher/
 ```
 
+ルートページはランチャー専用です。パラメーターなしで開いた場合は、ジェネレーター画面へ自動的に移動します。
+
 ## 対応するアクション
 
 | action | 動作 | 任意指定 |
@@ -23,7 +25,11 @@ https://rutile3.github.io/scrapbox-diary-launcher/
 
 ## ランチャージェネレーター
 
-公開ページをパラメーターなしで開くと、ランチャージェネレーターが表示されます。
+次のジェネレーター画面を開きます。公開ページをパラメーターなしで開いた場合も、この画面へ自動的に移動します。
+
+```text
+https://rutile3.github.io/scrapbox-diary-launcher/generator.html
+```
 
 1. Scrapboxプロジェクトを入力する
 2. アクションを選択する
