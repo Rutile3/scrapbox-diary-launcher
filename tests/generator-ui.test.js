@@ -59,11 +59,25 @@ test("各生成結果にコピー操作が関連付けられている", () => {
 
 test("ルートページはジェネレーターUIを読み込まず、専用ページへ転送できる", () => {
   const html = read("index.html");
-  const app = read("js/app.js");
+  const launcherUi = read("js/launcher-ui.js");
 
   assert.doesNotMatch(html, /data-generator-form|js\/generators\.js|js\/generator-ui\.js/);
-  assert.match(app, /result\.type === "help"/);
-  assert.match(app, /location\.replace\(new URL\("generator\.html"/);
+  assert.match(launcherUi, /result\.type === "help"/);
+  assert.match(launcherUi, /location\.replace\(new URL\("generator\.html"/);
+});
+
+test("ランチャーとジェネレーターが画面専用のスタイルとUIスクリプトを読み込む", () => {
+  const launcherHtml = read("index.html");
+  const generatorHtml = read("generator.html");
+  const launcherCss = read("css/launcher.css");
+
+  assert.match(launcherHtml, /href="css\/launcher\.css"/);
+  assert.match(launcherHtml, /src="js\/launcher-ui\.js"/);
+  assert.doesNotMatch(launcherHtml, /generator\.css|generator-ui\.js/);
+  assert.match(generatorHtml, /href="css\/generator\.css"/);
+  assert.match(generatorHtml, /src="js\/generator-ui\.js"/);
+  assert.doesNotMatch(generatorHtml, /launcher\.css|launcher-ui\.js/);
+  assert.doesNotMatch(launcherCss, /\.card|\bform\b|\.output|--accent/);
 });
 
 test("ジェネレーターは正規ランチャーのルートURLを生成する", () => {
