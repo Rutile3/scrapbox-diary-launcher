@@ -192,6 +192,8 @@ https://scrapbox.io/<URLエンコード済みproject>/<ページ名>?body=<URL�
 
 BootstrapのCDN資産にはバージョンを固定したURL、Subresource Integrity（SRI）、`crossorigin="anonymous"` を指定します。ローカルの `css/generator.css` はBootstrapの後に読み込みます。
 
+画面はブランドヘッダー、生成フォームと使用方法を収めたカード、フィードバック導線を持つフッターで構成します。Bootstrapのグリッドにより、広い画面では2つのカードを横に並べ、狭い画面では1列に配置します。生成結果は等幅フォントで表示します。
+
 - Scrapboxプロジェクト名
 - アクション
 - 日次アクション用の日付

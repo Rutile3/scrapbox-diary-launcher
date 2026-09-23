@@ -50,6 +50,25 @@ test("各画面のfaviconを小文字のimageフォルダーから読み込む",
   assert.equal(rootEntries.includes("Image"), false);
 });
 
+test("ジェネレーターがテンプレート準拠のBootstrapレイアウトと画像資産を使用する", () => {
+  const html = read("generator.html");
+  const css = read("css/generator.css");
+
+  assert.match(html, /class="navbar navbar-dark bg-brand shadow-sm"/);
+  assert.match(html, /class="flex-fill container-md my-4"/);
+  assert.match(html, /class="row g-4"/);
+  assert.match(html, /class="card shadow-sm"/);
+  assert.match(html, /src="image\/avatar\.png" alt="Rutile3"/);
+  assert.match(html, /<footer class="py-3 bg-brand text-white">/);
+  assert.match(html, /class="form-control"/);
+  assert.match(html, /class="form-select"/);
+  assert.match(html, /class="btn btn-primary"/);
+  assert.equal(fs.existsSync(path.join(root, "image", "avatar.png")), true);
+  assert.match(css, /--brand:/);
+  assert.match(css, /\.avatar/);
+  assert.match(css, /\.mono/);
+});
+
 test("各生成結果にコピー操作が関連付けられている", () => {
   const html = read("generator.html");
   for (const id of ["output-url", "output-userscript", "output-powershell", "output-bat"]) {
