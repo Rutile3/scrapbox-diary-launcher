@@ -233,6 +233,9 @@ PowerShellでは単一引用符を2個に、BATでは `%` を `%%`、二重引�
 - 自由記述本文をGitHub Pagesへのクエリ文字列に含めない
 - 本文をコンソールへ出力しない
 - 入力値や本文を `localStorage` または `sessionStorage` へ保存しない
+- Google Analyticsはジェネレーター画面だけで使用し、フォームの入力値と生成結果をイベントとして送信しない
+- Google Analyticsへ送信するページURLは、本文を含む可能性があるURLフラグメントを除外する
+- ランチャー画面ではGoogle Analyticsを読み込まない
 - 不正な入力で別のScrapboxプロジェクトへ暗黙に転送しない
 - ユーザー入力はURL、JavaScript、PowerShell、BATの用途に応じてエンコードまたはエスケープする
 
