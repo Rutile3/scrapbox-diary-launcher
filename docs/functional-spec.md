@@ -14,7 +14,7 @@
 - 月間予定ページの本文をブラウザー内で生成する
 - 正規URL、Scrapbox UserScript、PowerShell、BATを画面から生成する
 
-プレーンなHTML、CSS、JavaScriptで動作し、フレームワーク、外部CDN、ビルド処理、実行時サーバーを必要としません。
+HTML、CSS、JavaScriptで動作し、ビルド処理と実行時サーバーを必要としません。ランチャー画面は外部ライブラリに依存しません。ジェネレーター画面は、表示とUI部品の基盤としてBootstrap 5.3.3のCSSとBundle JavaScriptをjsDelivr CDNから読み込みます。
 
 ## 3. 用語
 
@@ -189,6 +189,8 @@ https://scrapbox.io/<URLエンコード済みproject>/<ページ名>?body=<URL�
 ### 8.1 入力画面
 
 `generator.html` で次を入力できます。ジェネレーターが生成する正規ランチャーURLのベースは、`generator.html` ではなくルートページです。
+
+BootstrapのCDN資産にはバージョンを固定したURL、Subresource Integrity（SRI）、`crossorigin="anonymous"` を指定します。ローカルの `css/generator.css` はBootstrapの後に読み込みます。
 
 - Scrapboxプロジェクト名
 - アクション

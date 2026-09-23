@@ -80,6 +80,19 @@ test("ランチャーとジェネレーターが画面専用のスタイルとUI
   assert.doesNotMatch(launcherCss, /\.card|\bform\b|\.output|--accent/);
 });
 
+test("Bootstrap 5.3.3をジェネレーターだけがSRI付きで読み込む", () => {
+  const launcherHtml = read("index.html");
+  const generatorHtml = read("generator.html");
+
+  assert.match(generatorHtml, /bootstrap@5\.3\.3\/dist\/css\/bootstrap\.min\.css/);
+  assert.match(generatorHtml, /bootstrap@5\.3\.3\/dist\/js\/bootstrap\.bundle\.min\.js/);
+  assert.match(generatorHtml, /sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW\+ALEwIH/);
+  assert.match(generatorHtml, /sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz/);
+  assert.equal((generatorHtml.match(/crossorigin="anonymous"/g) || []).length, 2);
+  assert.ok(generatorHtml.indexOf("bootstrap.min.css") < generatorHtml.indexOf("css/generator.css"));
+  assert.doesNotMatch(launcherHtml, /bootstrap|cdn\.jsdelivr\.net/);
+});
+
 test("ジェネレーターは正規ランチャーのルートURLを生成する", () => {
   const script = read("js/generator-ui.js");
 
