@@ -58,7 +58,7 @@ test("ジェネレーターがテンプレート準拠のBootstrapレイアウ�
   assert.match(html, /class="flex-fill container-md my-4"/);
   assert.match(html, /class="row g-4"/);
   assert.match(html, /class="card shadow-sm"/);
-  assert.match(html, /src="image\/avatar\.png" alt="Rutile3"/);
+  assert.match(html, /src="image\/avatar\.png" alt=""/);
   assert.match(html, /<footer class="py-3 bg-brand text-white">/);
   assert.match(html, /class="form-control"/);
   assert.match(html, /class="form-select"/);
@@ -67,6 +67,20 @@ test("ジェネレーターがテンプレート準拠のBootstrapレイアウ�
   assert.match(css, /--brand:/);
   assert.match(css, /\.avatar/);
   assert.match(css, /\.mono/);
+});
+
+test("ジェネレーターのカラースキームをライトテーマに固定する", () => {
+  const html = read("generator.html");
+
+  assert.match(html, /<meta name="color-scheme" content="light">/);
+  assert.doesNotMatch(html, /<meta name="color-scheme" content="light dark">/);
+});
+
+test("作者名に隣接するアバターを装飾画像として扱う", () => {
+  const html = read("generator.html");
+
+  assert.match(html, /<span[^>]*>by Rutile3<\/span>\s*<img src="image\/avatar\.png" alt=""/);
+  assert.doesNotMatch(html, /<img src="image\/avatar\.png" alt="Rutile3"/);
 });
 
 test("ヘッダーのツール名がGitHubリポジトリへリンクする", () => {
@@ -108,20 +122,20 @@ test("ランチャーとジェネレーターが画面専用のスタイルとUI
   assert.doesNotMatch(launcherCss, /\.card|\bform\b|\.output|--accent/);
 });
 
-test("Bootstrap 5.3.3をジェネレーターだけがSRI付きで読み込む", () => {
+test("Bootstrap 5.3.3のCSSだけをジェネレーターがSRI付きで読み込む", () => {
   const launcherHtml = read("index.html");
   const generatorHtml = read("generator.html");
 
   assert.match(generatorHtml, /bootstrap@5\.3\.3\/dist\/css\/bootstrap\.min\.css/);
-  assert.match(generatorHtml, /bootstrap@5\.3\.3\/dist\/js\/bootstrap\.bundle\.min\.js/);
+  assert.doesNotMatch(generatorHtml, /bootstrap@5\.3\.3\/dist\/js\/bootstrap\.bundle\.min\.js/);
   assert.match(generatorHtml, /sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW\+ALEwIH/);
-  assert.match(generatorHtml, /sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz/);
-  assert.equal((generatorHtml.match(/crossorigin="anonymous"/g) || []).length, 2);
+  assert.doesNotMatch(generatorHtml, /sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz/);
+  assert.equal((generatorHtml.match(/crossorigin="anonymous"/g) || []).length, 1);
   assert.ok(generatorHtml.indexOf("bootstrap.min.css") < generatorHtml.indexOf("css/generator.css"));
   assert.doesNotMatch(launcherHtml, /bootstrap|cdn\.jsdelivr\.net/);
 });
 
-test("Google Analyticsをジェネレーターだけで本文を除外して初期化する", () => {
+test("Google Analyticsをジェネレーターだけでクエリ文字列とフラグメントを除外して初期化する", () => {
   const launcherHtml = read("index.html");
   const generatorHtml = read("generator.html");
   const analyticsBlock = generatorHtml.match(/<!-- Google tag \(gtag\.js\) -->[\s\S]*?page_location:[\s\S]*?<\/script>/);
@@ -131,9 +145,12 @@ test("Google Analyticsをジェネレーターだけで本文を除外して初�
   assert.match(analyticsBlock[0], /gtag\("config", "G-501GNTE7BK"/);
   assert.match(
     analyticsBlock[0],
-    /page_location: window\.location\.origin \+ window\.location\.pathname \+ window\.location\.search/
+    /page_location: window\.location\.origin \+ window\.location\.pathname/
   );
-  assert.doesNotMatch(analyticsBlock[0], /location\.href|location\.hash|generator-body|data-generator-form/);
+  assert.doesNotMatch(
+    analyticsBlock[0],
+    /location\.href|location\.search|location\.hash|generator-body|data-generator-form/
+  );
   assert.doesNotMatch(launcherHtml, /googletagmanager|G-501GNTE7BK|\bgtag\b/);
 });
 
