@@ -49,6 +49,13 @@
 - 実際のScrapboxへの遷移テストでは、意図した検証用プロジェクトを明示的に指定する
 - 外部の旧 `/RedirectPage/` Pages URLは、このローカル確認の対象外とする
 
+## Google Analytics
+
+1. Google Analyticsの読み込みを許可できる環境で、`generator.html?project=Secret#body=Private` を開く
+2. 開発者ツールのコンソールで `dataLayer.find(item => item[0] === "config")?.[2]?.page_location` を実行する
+3. 結果が `generator.html` までのURLであり、`?project=Secret` と `#body=Private` を含まないことを確認する
+4. ランチャー画面ではGoogle Analyticsが読み込まれないことを確認する
+
 ## 検証記録（2026年9月10日）
 
 ### 完了した確認

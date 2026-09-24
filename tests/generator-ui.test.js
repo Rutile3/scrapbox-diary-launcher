@@ -121,7 +121,7 @@ test("Bootstrap 5.3.3をジェネレーターだけがSRI付きで読み込む",
   assert.doesNotMatch(launcherHtml, /bootstrap|cdn\.jsdelivr\.net/);
 });
 
-test("Google Analyticsをジェネレーターだけで本文を除外して初期化する", () => {
+test("Google Analyticsをジェネレーターだけでクエリ文字列とフラグメントを除外して初期化する", () => {
   const launcherHtml = read("index.html");
   const generatorHtml = read("generator.html");
   const analyticsBlock = generatorHtml.match(/<!-- Google tag \(gtag\.js\) -->[\s\S]*?page_location:[\s\S]*?<\/script>/);
@@ -131,9 +131,12 @@ test("Google Analyticsをジェネレーターだけで本文を除外して初�
   assert.match(analyticsBlock[0], /gtag\("config", "G-501GNTE7BK"/);
   assert.match(
     analyticsBlock[0],
-    /page_location: window\.location\.origin \+ window\.location\.pathname \+ window\.location\.search/
+    /page_location: window\.location\.origin \+ window\.location\.pathname/
   );
-  assert.doesNotMatch(analyticsBlock[0], /location\.href|location\.hash|generator-body|data-generator-form/);
+  assert.doesNotMatch(
+    analyticsBlock[0],
+    /location\.href|location\.search|location\.hash|generator-body|data-generator-form/
+  );
   assert.doesNotMatch(launcherHtml, /googletagmanager|G-501GNTE7BK|\bgtag\b/);
 });
 

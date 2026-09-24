@@ -97,7 +97,7 @@ https://rutile3.github.io/scrapbox-diary-launcher/?action=create-month-schedule&
 
 入力した本文はログ、localStorage、sessionStorageへ保存しません。正規ランチャーは、クエリ文字列の `body` を受け付けません。
 
-ジェネレーター画面ではGoogle Analyticsを使用しますが、フォームの入力値や生成結果を送信するイベント計測は行いません。ページURLを計測するときはフラグメントを除外します。Scrapboxへ遷移するランチャー画面ではGoogle Analyticsを読み込みません。
+ジェネレーター画面ではGoogle Analyticsを使用しますが、フォームの入力値や生成結果を送信するイベント計測は行いません。Google Analyticsへ送信するページURLには、クエリ文字列とURLフラグメントを含めません。Scrapboxへ遷移するランチャー画面ではGoogle Analyticsを読み込みません。
 
 ## 旧RedirectPageからの移行
 
