@@ -3,115 +3,148 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
   <title>Scrapbox Diary Launcher Generator</title>
   <link rel="icon" href="image/favicon.ico">
-  <link rel="stylesheet" href="css/app.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="css/generator.css">
   <script defer src="js/diary-core.js"></script>
   <script defer src="js/launcher.js"></script>
   <script defer src="js/generators.js"></script>
   <script defer src="js/generator-ui.js"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-501GNTE7BK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-501GNTE7BK", {
+      page_location: window.location.origin + window.location.pathname + window.location.search
+    });
+  </script>
 </head>
-<body>
-  <main>
-    <h1>Scrapbox Diary Launcher</h1>
+<body class="d-flex flex-column min-vh-100">
+  <header class="navbar navbar-dark bg-brand shadow-sm">
+    <div class="container-md d-flex align-items-center">
+      <a href="https://github.com/Rutile3/scrapbox-diary-launcher" class="navbar-brand fw-bold">Scrapbox Diary Launcher</a>
+      <a href="https://link-hub.rutile3.com/" target="_blank" rel="noopener"
+        class="d-flex align-items-center text-decoration-none ms-auto">
+        <span class="text-white small ms-auto">by Rutile3</span>
+        <img src="image/avatar.png" alt="Rutile3" class="avatar ms-2">
+      </a>
+    </div>
+  </header>
 
-    <section class="card" aria-labelledby="generator-heading">
-      <h2 id="generator-heading">ランチャーを生成</h2>
-      <p>用途を選び、呼び出し元に貼り付けるコードを生成します。</p>
+  <main class="flex-fill container-md my-4">
+    <div class="row g-4">
+      <div class="col-lg-7">
+        <section class="card shadow-sm" aria-labelledby="generator-heading">
+          <h1 class="card-header bg-light fw-semibold fs-5" id="generator-heading">ランチャーを生成</h1>
+          <div class="card-body">
+            <p class="card-text">用途を選び、呼び出し元に貼り付けるコードを生成します。</p>
+            <form data-generator-form>
+              <div class="mb-3">
+                <label class="form-label fw-semibold" for="generator-project">Scrapboxプロジェクト</label>
+                <input class="form-control" id="generator-project" name="project" type="text" required
+                  autocomplete="off" placeholder="Example">
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-semibold" for="generator-action">アクション</label>
+                <select class="form-select" id="generator-action" name="action">
+                  <option value="show-today">今日の日記を表示</option>
+                  <option value="create-today">今日の日記を作成</option>
+                  <option value="show-month">月ページを表示</option>
+                  <option value="create-month-schedule">月間予定を作成</option>
+                </select>
+              </div>
+              <div class="mb-3" data-date-field>
+                <label class="form-label fw-semibold" for="generator-date">日付（任意）</label>
+                <input class="form-control" id="generator-date" name="date" type="date">
+                <div class="form-text">省略時はブラウザーの今日の日付を使用します。</div>
+              </div>
+              <div class="mb-3" data-month-field hidden>
+                <label class="form-label fw-semibold" for="generator-month">月（任意）</label>
+                <input class="form-control" id="generator-month" name="month" type="month" disabled>
+                <div class="form-text">省略時はブラウザーの現在月を使用します。</div>
+              </div>
+              <div class="mb-3" data-body-field hidden>
+                <label class="form-label fw-semibold" for="generator-body">日記本文／テンプレート（任意）</label>
+                <textarea class="form-control" id="generator-body" name="body" rows="7" disabled></textarea>
+                <div class="form-text">本文はURLフラグメントに格納され、ブラウザー内だけで処理されます。</div>
+              </div>
+              <button class="btn btn-primary" type="submit">生成する</button>
+            </form>
 
-      <form data-generator-form>
-        <div class="field">
-          <label for="generator-project">Scrapboxプロジェクト</label>
-          <input id="generator-project" name="project" type="text" required autocomplete="off" placeholder="Example">
-        </div>
+            <section class="alert alert-danger mt-4" data-generator-error role="alert" tabindex="-1" hidden>
+              <h2 class="h5 alert-heading">生成できませんでした</h2>
+              <p class="mb-0" data-generator-error-message></p>
+            </section>
 
-        <div class="field">
-          <label for="generator-action">アクション</label>
-          <select id="generator-action" name="action">
-            <option value="show-today">今日の日記を表示</option>
-            <option value="create-today">今日の日記を作成</option>
-            <option value="show-month">月ページを表示</option>
-            <option value="create-month-schedule">月間予定を作成</option>
-          </select>
-        </div>
+            <section class="mt-4" data-generator-outputs aria-labelledby="outputs-heading" tabindex="-1" hidden>
+              <h2 class="h5" id="outputs-heading">生成結果</h2>
+              <p class="text-body-secondary small">本文を含む場合も、GitHub Pagesへ送るクエリ文字列には本文を含めません。</p>
+              <div class="output border rounded bg-body-tertiary p-3 mb-3">
+                <label class="form-label fw-semibold" for="output-url">正規ランチャーURL</label>
+                <textarea class="form-control mono mb-2" id="output-url" rows="3" readonly></textarea>
+                <button class="btn btn-outline-secondary btn-sm" type="button" data-copy-target="output-url"
+                  data-copy-label="URL">URLをコピー</button>
+              </div>
+              <div class="output border rounded bg-body-tertiary p-3 mb-3">
+                <label class="form-label fw-semibold" for="output-userscript">Scrapbox UserScript／JavaScript</label>
+                <textarea class="form-control mono mb-2" id="output-userscript" rows="6" readonly></textarea>
+                <button class="btn btn-outline-secondary btn-sm" type="button" data-copy-target="output-userscript"
+                  data-copy-label="UserScript">UserScriptをコピー</button>
+              </div>
+              <div class="output recommended border rounded bg-body-tertiary p-3 mb-3">
+                <label class="form-label fw-semibold" for="output-powershell">PowerShell（Windowsで推奨）</label>
+                <textarea class="form-control mono mb-2" id="output-powershell" rows="3" readonly></textarea>
+                <button class="btn btn-outline-secondary btn-sm" type="button" data-copy-target="output-powershell"
+                  data-copy-label="PowerShell">PowerShellをコピー</button>
+              </div>
+              <div class="output border rounded bg-body-tertiary p-3">
+                <label class="form-label fw-semibold" for="output-bat">BAT</label>
+                <textarea class="form-control mono mb-2" id="output-bat" rows="3" readonly></textarea>
+                <button class="btn btn-outline-secondary btn-sm" type="button" data-copy-target="output-bat"
+                  data-copy-label="BAT">BATをコピー</button>
+              </div>
+            </section>
+            <p class="copy-status mb-0 mt-3" data-copy-status role="status" aria-live="polite"></p>
+          </div>
+        </section>
+      </div>
 
-        <div class="field" data-date-field>
-          <label for="generator-date">日付（任意）</label>
-          <input id="generator-date" name="date" type="date">
-          <small>省略時はブラウザーの今日の日付を使用します。</small>
-        </div>
-
-        <div class="field" data-month-field hidden>
-          <label for="generator-month">月（任意）</label>
-          <input id="generator-month" name="month" type="month" disabled>
-          <small>省略時はブラウザーの現在月を使用します。</small>
-        </div>
-
-        <div class="field" data-body-field hidden>
-          <label for="generator-body">日記本文／テンプレート（任意）</label>
-          <textarea id="generator-body" name="body" rows="7" disabled></textarea>
-          <small>本文はURLフラグメントに格納され、ブラウザー内だけで処理されます。</small>
-        </div>
-
-        <button class="primary" type="submit">生成する</button>
-      </form>
-
-      <section class="error" data-generator-error role="alert" tabindex="-1" hidden>
-        <h3>生成できませんでした</h3>
-        <p data-generator-error-message></p>
-      </section>
-
-      <section data-generator-outputs aria-labelledby="outputs-heading" tabindex="-1" hidden>
-        <h3 id="outputs-heading">生成結果</h3>
-        <p class="privacy-note">本文を含む場合も、GitHub Pagesへ送るクエリ文字列には本文を含めません。</p>
-
-        <div class="output">
-          <label for="output-url">正規ランチャーURL</label>
-          <textarea id="output-url" rows="3" readonly></textarea>
-          <button type="button" data-copy-target="output-url" data-copy-label="URL">URLをコピー</button>
-        </div>
-
-        <div class="output">
-          <label for="output-userscript">Scrapbox UserScript／JavaScript</label>
-          <textarea id="output-userscript" rows="6" readonly></textarea>
-          <button type="button" data-copy-target="output-userscript" data-copy-label="UserScript">UserScriptをコピー</button>
-        </div>
-
-        <div class="output recommended">
-          <label for="output-powershell">PowerShell（Windowsで推奨）</label>
-          <textarea id="output-powershell" rows="3" readonly></textarea>
-          <button type="button" data-copy-target="output-powershell" data-copy-label="PowerShell">PowerShellをコピー</button>
-        </div>
-
-        <div class="output">
-          <label for="output-bat">BAT</label>
-          <textarea id="output-bat" rows="3" readonly></textarea>
-          <button type="button" data-copy-target="output-bat" data-copy-label="BAT">BATをコピー</button>
-        </div>
-      </section>
-
-      <p class="copy-status" data-copy-status role="status" aria-live="polite"></p>
-    </section>
-
-    <section class="card" aria-labelledby="usage-heading">
-      <h2 id="usage-heading">URLの指定方法</h2>
-      <p><code>project</code> と <code>action</code> をクエリ文字列に指定してください。</p>
-      <ul>
-        <li><code>?action=show-today&amp;project=Example</code></li>
-        <li><code>?action=create-today&amp;project=Example#body=ENCODED_TEXT</code></li>
-        <li><code>?action=show-month&amp;project=Example</code></li>
-        <li><code>?action=create-month-schedule&amp;project=Example</code></li>
-      </ul>
-      <p>
-        日付を指定する場合は日次アクションに <code>date=YYYY-MM-DD</code>、
-        月次アクションに <code>month=YYYY-MM</code> を追加します。
-        省略時はブラウザーのローカル日付を使用します。
-      </p>
-      <p>
-        自由記述の本文は、GitHub Pagesへのクエリに含めず、
-        <code>#body=...</code> の形式でURLフラグメントに指定してください。
-      </p>
-    </section>
+      <div class="col-lg-5">
+        <section class="card shadow-sm" aria-labelledby="usage-heading">
+          <h2 class="card-header bg-light fw-semibold fs-5" id="usage-heading">URLの指定方法</h2>
+          <div class="card-body">
+            <p><code>project</code> と <code>action</code> をクエリ文字列に指定してください。</p>
+            <ul class="ps-3">
+              <li><code>?action=show-today&amp;project=Example</code></li>
+              <li><code>?action=create-today&amp;project=Example#body=ENCODED_TEXT</code></li>
+              <li><code>?action=show-month&amp;project=Example</code></li>
+              <li><code>?action=create-month-schedule&amp;project=Example</code></li>
+            </ul>
+            <p>日付を指定する場合は日次アクションに <code>date=YYYY-MM-DD</code>、月次アクションに
+              <code>month=YYYY-MM</code> を追加します。省略時はブラウザーのローカル日付を使用します。</p>
+            <p class="mb-0">自由記述の本文は、GitHub Pagesへのクエリに含めず、
+              <code>#body=...</code> の形式でURLフラグメントに指定してください。</p>
+          </div>
+        </section>
+      </div>
+    </div>
   </main>
+
+  <footer class="py-3 bg-brand text-white">
+    <div class="container-md small d-flex flex-column flex-sm-row justify-content-sm-between gap-1">
+      <span>© 2026 Rutile3</span>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdZi21BbOmTiuOlzpjJSE-ptDKiHBHucX5AawyzjP9647AKfg/viewform?usp=pp_url&entry.1006266992=Scrapbox+Diary+Launcher"
+        target="_blank" rel="noopener" class="text-white">フィードバック</a>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
 </body>
 </html>

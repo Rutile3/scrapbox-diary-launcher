@@ -1,0 +1,38 @@
+:root {
+  --brand: rgba(219, 169, 39, 0.8);
+}
+
+.bg-brand {
+  background: var(--brand);
+}
+
+.avatar {
+  height: 32px;
+  object-fit: cover;
+  width: 32px;
+}
+
+body {
+  background: #efefef;
+}
+
+code {
+  overflow-wrap: anywhere;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Roboto Mono",
+    "Source Code Pro", "Noto Sans Mono CJK JP", "Noto Sans Mono", monospace;
+}
+
+.recommended {
+  border-left: 0.3rem solid var(--brand) !important;
+}
+
+.copy-status {
+  min-height: 1.6em;
+}
+
+[hidden] {
+  display: none !important;
+}

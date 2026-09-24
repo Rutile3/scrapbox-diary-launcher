@@ -2,7 +2,7 @@
 
 Scrapbox Diary Launcherは、日付ベースのScrapbox日記ページを開くための静的なGitHub Pagesツールです。
 
-Scrapbox UserScript、ブックマーク、PowerShell、BAT、Windowsスタートアップなどの呼び出し元から日付計算やURLエンコードを取り除き、このランチャーへ集約します。フレームワーク、ビルド手順、外部CDNは使用していません。
+Scrapbox UserScript、ブックマーク、PowerShell、BAT、Windowsスタートアップなどの呼び出し元から日付計算やURLエンコードを取り除き、このランチャーへ集約します。ビルド手順は使用していません。ランチャー画面は外部ライブラリに依存せず、ジェネレーター画面だけがBootstrap 5.3.3をCDNから読み込みます。
 
 公開ページ:
 
@@ -97,6 +97,8 @@ https://rutile3.github.io/scrapbox-diary-launcher/?action=create-month-schedule&
 
 入力した本文はログ、localStorage、sessionStorageへ保存しません。正規ランチャーは、クエリ文字列の `body` を受け付けません。
 
+ジェネレーター画面ではGoogle Analyticsを使用しますが、フォームの入力値や生成結果を送信するイベント計測は行いません。ページURLを計測するときはフラグメントを除外します。Scrapboxへ遷移するランチャー画面ではGoogle Analyticsを読み込みません。
+
 ## 旧RedirectPageからの移行
 
 リポジトリ名の変更に伴い、`/RedirectPage/` を含む旧GitHub Pages URLは利用できません。Scrapbox UserScript、PowerShell／BAT、Windowsスタートアップ、ブックマークなど、リポジトリ外の呼び出し元も更新してください。
@@ -107,7 +109,7 @@ https://rutile3.github.io/scrapbox-diary-launcher/?action=create-month-schedule&
 
 ## 開発とテスト
 
-実装はプレーンなHTML、CSS、JavaScriptで構成されています。Node.jsの標準テストランナーを使うため、テスト用パッケージのインストールは不要です。
+実装はHTML、CSS、JavaScriptで構成されています。ジェネレーター画面はjsDelivr CDNのBootstrap 5.3.3を使用しますが、ビルド処理はありません。Node.jsの標準テストランナーを使うため、テスト用パッケージのインストールは不要です。
 
 ```powershell
 node --test
