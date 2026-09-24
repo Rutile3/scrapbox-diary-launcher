@@ -69,6 +69,15 @@ test("ジェネレーターがテンプレート準拠のBootstrapレイアウ�
   assert.match(css, /\.mono/);
 });
 
+test("ヘッダーのツール名がGitHubリポジトリへリンクする", () => {
+  const html = read("generator.html");
+
+  assert.match(
+    html,
+    /<a href="https:\/\/github\.com\/Rutile3\/scrapbox-diary-launcher" class="navbar-brand fw-bold">Scrapbox Diary Launcher<\/a>/
+  );
+});
+
 test("各生成結果にコピー操作が関連付けられている", () => {
   const html = read("generator.html");
   for (const id of ["output-url", "output-userscript", "output-powershell", "output-bat"]) {
