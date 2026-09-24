@@ -42,6 +42,7 @@
 3. コピー結果が画面上へ通知されることを確認する
 4. ウィンドウ幅を狭くしても、入力欄と生成結果が画面外へはみ出さないことを確認する
 5. ヘッダー左上のツール名が `https://github.com/Rutile3/scrapbox-diary-launcher` へリンクしていることを確認する
+6. 開発者ツールのNetworkパネルで、Bootstrap CSSは読み込まれ、Bootstrap Bundle JavaScriptは読み込まれないことを確認する
 
 ## 注意事項
 

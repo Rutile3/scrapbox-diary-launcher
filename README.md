@@ -2,7 +2,7 @@
 
 Scrapbox Diary Launcherは、日付ベースのScrapbox日記ページを開くための静的なGitHub Pagesツールです。
 
-Scrapbox UserScript、ブックマーク、PowerShell、BAT、Windowsスタートアップなどの呼び出し元から日付計算やURLエンコードを取り除き、このランチャーへ集約します。ビルド手順は使用していません。ランチャー画面は外部ライブラリに依存せず、ジェネレーター画面だけがBootstrap 5.3.3をCDNから読み込みます。
+Scrapbox UserScript、ブックマーク、PowerShell、BAT、Windowsスタートアップなどの呼び出し元から日付計算やURLエンコードを取り除き、このランチャーへ集約します。ビルド手順は使用していません。ランチャー画面は外部ライブラリに依存せず、ジェネレーター画面だけがBootstrap 5.3.3のCSSをCDNから読み込みます。
 
 公開ページ:
 
@@ -109,7 +109,7 @@ https://rutile3.github.io/scrapbox-diary-launcher/?action=create-month-schedule&
 
 ## 開発とテスト
 
-実装はHTML、CSS、JavaScriptで構成されています。ジェネレーター画面はjsDelivr CDNのBootstrap 5.3.3を使用しますが、ビルド処理はありません。Node.jsの標準テストランナーを使うため、テスト用パッケージのインストールは不要です。
+実装はHTML、CSS、JavaScriptで構成されています。ジェネレーター画面はjsDelivr CDNのBootstrap 5.3.3のCSSを使用しますが、BootstrapのJavaScriptとビルド処理は使用しません。Node.jsの標準テストランナーを使うため、テスト用パッケージのインストールは不要です。
 
 ```powershell
 node --test
