@@ -58,7 +58,7 @@ test("ジェネレーターがテンプレート準拠のBootstrapレイアウ�
   assert.match(html, /class="flex-fill container-md my-4"/);
   assert.match(html, /class="row g-4"/);
   assert.match(html, /class="card shadow-sm"/);
-  assert.match(html, /src="image\/avatar\.png" alt="Rutile3"/);
+  assert.match(html, /src="image\/avatar\.png" alt=""/);
   assert.match(html, /<footer class="py-3 bg-brand text-white">/);
   assert.match(html, /class="form-control"/);
   assert.match(html, /class="form-select"/);
@@ -67,6 +67,13 @@ test("ジェネレーターがテンプレート準拠のBootstrapレイアウ�
   assert.match(css, /--brand:/);
   assert.match(css, /\.avatar/);
   assert.match(css, /\.mono/);
+});
+
+test("作者名に隣接するアバターを装飾画像として扱う", () => {
+  const html = read("generator.html");
+
+  assert.match(html, /<span[^>]*>by Rutile3<\/span>\s*<img src="image\/avatar\.png" alt=""/);
+  assert.doesNotMatch(html, /<img src="image\/avatar\.png" alt="Rutile3"/);
 });
 
 test("ヘッダーのツール名がGitHubリポジトリへリンクする", () => {
