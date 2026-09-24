@@ -1,26 +1,33 @@
 ### Windows
-# Windows thumbnail cache files
+# Windowsのサムネイルキャッシュ
 Thumbs.db
 
-# Folder config file
+# フォルダー設定ファイル
 [Dd]esktop.ini
 
-# Recycle Bin used on file shares
+# ファイル共有で使用されるごみ箱
 $RECYCLE.BIN/
 
-# Windows shortcuts
+# Windowsショートカット
 *.lnk
 
 ### VS Code
-# VSCode settings (keep shared configuration)
+# VS Code設定（共有設定は管理対象に含める）
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# Local History for Visual Studio Code
+# VS Codeのローカル履歴
 .history/
 
-# Built Visual Studio Code Extensions
+# ビルド済みVS Code拡張機能
 *.vsix
+
+### ローカルブラウザー検証
+# ブラウザープロファイルと検証スクリプト
+/.tmp-*
+
+# 一時スクリーンショット
+/.browser-*.png
