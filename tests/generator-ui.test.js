@@ -69,6 +69,13 @@ test("ジェネレーターがテンプレート準拠のBootstrapレイアウ�
   assert.match(css, /\.mono/);
 });
 
+test("ジェネレーターのカラースキームをライトテーマに固定する", () => {
+  const html = read("generator.html");
+
+  assert.match(html, /<meta name="color-scheme" content="light">/);
+  assert.doesNotMatch(html, /<meta name="color-scheme" content="light dark">/);
+});
+
 test("作者名に隣接するアバターを装飾画像として扱う", () => {
   const html = read("generator.html");
 
